@@ -1,0 +1,25 @@
+CREATE TABLE IF NOT EXISTS GoalMonth (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    month INTEGER NOT NULL,
+    year INTEGER NOT NULL,
+    goal INTEGER NOT NULL
+);
+
+insertGoalMonth:
+INSERT INTO GoalMonth(month, year, goal)
+VALUES (?, ?, ?);
+
+
+selectGoalByMonthAndYear:
+SELECT goal FROM GoalMonth
+WHERE month = ? AND year = ?;
+
+
+updateGoalMonth:
+UPDATE GoalMonth
+SET goal = ?
+WHERE year = ? AND month = ?;
+
+deleteGoalMonth:
+DELETE FROM GoalMonth
+WHERE id = ?;

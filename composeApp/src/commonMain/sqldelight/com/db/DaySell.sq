@@ -1,0 +1,35 @@
+CREATE TABLE IF NOT EXISTS DaySell (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    day INTEGER NOT NULL,
+    amount REAL NOT NULL,
+    monthId INTEGER NOT NULL,
+    FOREIGN KEY(monthId) REFERENCES GoalMonth(id)
+);
+
+insertDaySell:
+INSERT INTO DaySell(day, amount, monthId)
+VALUES (?, ?, (SELECT id FROM GoalMonth WHERE month = ? AND year = ?));
+
+selectSumOfSalesByMonth:
+SELECT SUM(amount) FROM DaySell
+WHERE monthId = (SELECT id FROM GoalMonth WHERE month = ? AND year = ?);
+
+selectDaySellByDay:
+SELECT amount FROM DaySell
+WHERE day = ? AND monthId = (SELECT id FROM GoalMonth WHERE month = ? AND year = ?);
+
+selectDaySellById:
+SELECT * FROM DaySell
+WHERE id = ?;
+
+selectAllDaySells:
+SELECT * FROM DaySell;
+
+updateDaySell:
+UPDATE DaySell
+SET amount = ?
+WHERE day = ? AND monthId = (SELECT id FROM GoalMonth WHERE month = ? AND year = ?);
+
+deleteDaySell:
+DELETE FROM DaySell
+WHERE id = ?;
