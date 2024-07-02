@@ -95,6 +95,8 @@ class MainViewModel(
         )
         screenModelScope.launch {
             monthDataSource.insertOrUpdateGoalMonth(goalMonth)
+            updatePercentSucces(LocalDate(today.year, goalMonth.month.toInt(), 1))
+
         }
     }
 
