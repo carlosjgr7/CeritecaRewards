@@ -178,7 +178,7 @@ fun DialogScreen(
                                         LocalDate(today.year, currentMonth.toMonthNumber(), 1),
                                         goal.toFloat()
                                     )
-
+                                    editGoal = false
                                 }) {
                                     Image(
                                         painter = painterResource(Res.drawable.save),
@@ -193,7 +193,7 @@ fun DialogScreen(
                 Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
-                    "meta de $currentMonth cumplida en un ${percentageCollect.value}%",
+                    "meta de $currentMonth cumplida en un ${String.format("%.2f", percentageCollect.value)}%",
                     fontSize = 12.sp,
                     color = Color(0xFFCDCDCD),
                     fontWeight = FontWeight.Bold,
@@ -277,6 +277,7 @@ fun DialogScreen(
                                         daytoSearch,
                                         SellOfday
                                     )
+                                    editDay = false
                                 }) {
                                     Image(
                                         painter = painterResource(Res.drawable.save),
