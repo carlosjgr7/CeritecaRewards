@@ -1,5 +1,6 @@
 package main.presentation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -160,6 +161,7 @@ fun DialogScreen(
                         trailingIcon = {
                             Row {
                                 IconButton(onClick = {
+                                    goal = currentGoalCollect.value
                                     editGoal = !editGoal
                                     if (editGoal) {
                                         focusGoal.requestFocus()
@@ -173,19 +175,22 @@ fun DialogScreen(
                                     )
 
                                 }
-                                IconButton(onClick = {
-                                    viewModel.saveGoalMonth(
-                                        LocalDate(today.year, currentMonth.toMonthNumber(), 1),
-                                        goal.toFloat()
-                                    )
-                                    editGoal = false
-                                }) {
-                                    Image(
-                                        painter = painterResource(Res.drawable.save),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(18.dp)
-                                    )
+                                AnimatedVisibility (editGoal){
+                                    IconButton(onClick = {
+                                        viewModel.saveGoalMonth(
+                                            LocalDate(today.year, currentMonth.toMonthNumber(), 1),
+                                            goal.toFloat()
+                                        )
+                                        editGoal = false
+                                    }) {
+                                        Image(
+                                            painter = painterResource(Res.drawable.save),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                    }
                                 }
+
                             }
                         }
                     )
@@ -259,6 +264,7 @@ fun DialogScreen(
                         trailingIcon = {
                             Row {
                                 IconButton(onClick = {
+                                    SellOfday = currentDayCollect.value
                                     editDay = !editDay
                                     if (editDay) {
                                         focusDaily.requestFocus()
@@ -272,19 +278,22 @@ fun DialogScreen(
                                     )
 
                                 }
-                                IconButton(onClick = {
-                                    viewModel.saveDaySell(
-                                        daytoSearch,
-                                        SellOfday
-                                    )
-                                    editDay = false
-                                }) {
-                                    Image(
-                                        painter = painterResource(Res.drawable.save),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(18.dp)
-                                    )
+                                AnimatedVisibility(editDay){
+                                    IconButton(onClick = {
+                                        viewModel.saveDaySell(
+                                            daytoSearch,
+                                            SellOfday
+                                        )
+                                        editDay = false
+                                    }) {
+                                        Image(
+                                            painter = painterResource(Res.drawable.save),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                    }
                                 }
+
                             }
                         }
                     )
