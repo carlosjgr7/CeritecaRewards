@@ -71,7 +71,6 @@ fun DialogScreen(
     val focusGoal = remember { FocusRequester() }
     val focusDaily = remember { FocusRequester() }
 
-    val formatter = NumberFormat.getNumberInstance(Locale.GERMANY)
 
     val symbols = DecimalFormatSymbols(Locale.US)
     symbols.groupingSeparator = '.'
@@ -142,11 +141,11 @@ fun DialogScreen(
                         textStyle = TextStyle(
                             fontWeight = FontWeight.Bold
                         ),
-                        value = if (goal > 0) formatter.format(goal) else "",
+                        value = if (goal > 0) formatter2.format(goal) else "",
                         label = { Text(text = "Meta $") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         onValueChange = {
-                            if (editGoal) goal = it.replace(".", "").toIntOrNull() ?: 0
+                            if (editGoal) goal = it.replace(".", "").replace(",","").toIntOrNull() ?: 0
                         },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             textColor = Color.Black,
